@@ -47,18 +47,26 @@ class Pokedex:
             self.pokemons.append(pokemon) if None not in pokemon else 0
     
     def buscar_pokemon_por_numero_pokedex(self):
-        numero_pokedex = input("Digite o número da pokédex do pokémon desejado: ")
+        while True:
+            try:    
+                numero_pokedex = int(input("Digite o número da pokédex do pokémon desejado: "))
+                break
+            except ValueError as e:
+                print("Ocorreu um erro:", e)
+        
         for pokemon in self.pokemons:
-            if pokemon[0] == int(numero_pokedex):
-                print(f"-=-=-=-=-= Número pokedex: {pokemon[0]} =-=-=-=-=-\n")
-                print(f"Nome: {pokemon[1]}")
-                print(f"Tipo: {pokemon[2]}")
-                print(f"Descrição: {pokemon[3]}")
-                print(f"Altura: {pokemon[4]}")
-                print(f"Peso: {pokemon[5]}")
-                print(f"Habilidades: {pokemon[6]}")
-                print(f"É lendário?: ",end = "")
-                print("Sim") if pokemon[7] == True else print("Não")
+                if pokemon[0] == int(numero_pokedex):
+                    print(f"-=-=-=-=-= Número pokedex: {pokemon[0]} =-=-=-=-=-\n")
+                    print(f"Nome: {pokemon[1]}")
+                    print(f"Tipo: {pokemon[2]}")
+                    print(f"Descrição: {pokemon[3]}")
+                    print(f"Altura: {pokemon[4]}")
+                    print(f"Peso: {pokemon[5]}")
+                    print(f"Habilidades: {pokemon[6]}")
+                    print(f"É lendário?: ",end = "")
+                    print("Sim") if pokemon[7] == True else print("Não")
+            
+                
         
     def buscar_pokemon_por_nome(self):
         nome = input("Digite o nome do pokémon a ser buscado: ")
@@ -171,13 +179,13 @@ class BancoDeDados:
         )
         self.cursor = self.__conn.cursor()
         
-        @property
-        def conn(self):
-            return self.__conn
-        
-        @conn.setter
-        def conn(self,conn):
-            self.__conn = conn
+    @property
+    def conn(self):
+        return self.__conn
+    
+    @conn.setter
+    def conn(self,conn):
+        self.__conn = conn
             
     def fechar_conexao(self):
         self.__conn.close()
