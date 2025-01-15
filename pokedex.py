@@ -163,14 +163,22 @@ class Pokedex:
 class BancoDeDados:
     def __init__(self, host="localhost", usuario="root", senha="root", db_name="pokedex"):
         # Conecta ao banco de dados MySQL
-        self.conn = mysql.connector.connect(
+        self.__conn = mysql.connector.connect(
             host=host,
             user=usuario,
             password=senha,
             database=db_name
         )
-        self.cursor = self.conn.cursor()
-
+        self.cursor = self.__conn.cursor()
+        
+        @property
+        def conn(self):
+            return self.__conn
+        
+        @conn.setter
+        def conn(self,conn):
+            self.__conn = conn
+            
     def fechar_conexao(self):
         self.conn.close()
 
