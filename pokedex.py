@@ -180,7 +180,7 @@ class BancoDeDados:
             self.__conn = conn
             
     def fechar_conexao(self):
-        self.conn.close()
+        self.__conn.close()
 
 bd = BancoDeDados()
 pokedex = Pokedex(bd)
